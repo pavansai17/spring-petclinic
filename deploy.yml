@@ -1,0 +1,27 @@
+- name: Deploy Spring Petclinic
+  hosts: servers
+  become: yes
+
+  tasks:
+    - name: Install Java, Maven and Git
+      apt:
+        name: [openjdk-17-jdk, maven, git]
+        state: present
+        update_cache: yes
+
+    - name: Clone the repository
+      git:
+        repo: https://github.com/pavansai17/spring-petclinic.git
+        dest: /opt/petclinic
+
+    - name: Build the jar
+      shell: mvn clean package -DskipTests
+      args:
+        chdir: /opt/petclinic
+
+    - name: Run the app on port 8080
+      shell: nohup java -jar target/spring-petclinic-*.jar --server.port=8080 > app.log 2>&1 &
+      args:
+        chdir: /opt/petclinic
+      async: 600
+      poll: 0
