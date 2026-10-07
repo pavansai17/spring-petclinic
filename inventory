@@ -1,6 +1,0 @@
-[servers]
-98.86.177.127
-18.232.137.135
-[servers:vars]
-ansible_user=ubuntu
-ansible_python_interpreter=/usr/bin/python3
