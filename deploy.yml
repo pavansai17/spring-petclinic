@@ -19,8 +19,8 @@
       args:
         chdir: /opt/petclinic
 
-    - name: Run the app on port 8080
-      shell: nohup java -jar target/spring-petclinic-*.jar --server.port=8080 > app.log 2>&1 &
+    - name: Run the app on port 8081
+      shell: nohup java -jar target/spring-petclinic-*.jar --server.port=8081 > app.log 2>&1 &
       args:
         chdir: /opt/petclinic
       async: 600
